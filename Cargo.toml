@@ -7,4 +7,3 @@ edition = "2021"
 
 [dependencies]
 configparser = "3.0.0"
-rust-ini = "0.18.0"
