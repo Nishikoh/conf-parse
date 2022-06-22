@@ -123,11 +123,35 @@ fn main() -> Result<(), Box<(dyn Error + 'static)>> {
     } else {
         &args[1]
     };
-    
+
     let mut config = Ini::new();
     let raw_config = config.load(file_path)?;
     let typed_config = TypedConfig::raw_to_typed(raw_config);
     println!("{:#?}", typed_config);
 
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use configparser::ini::Ini;
+
+    use crate::TypedConfig;
+
+    #[test]
+    fn parse_conf() {
+        let mut config = Ini::new();
+        let raw_config = match config.load("test.conf") {
+            Ok(it) => it,
+            Err(_) => panic!(),
+        };
+        let typed_config = TypedConfig::raw_to_typed(raw_config);
+        assert_eq!(typed_config.bool_config["debug"], true);
+        assert_eq!(typed_config.integer_config["count"], 100);
+        assert_eq!(typed_config.integer_config["number_with_padding"], 1);
+        assert_eq!(typed_config.float_config["average"], 1.1);
+        assert_eq!(typed_config.none_config["value_less"], ());
+        assert_eq!(typed_config.string_config["number_with_space"], "100 0000");
+        assert_eq!(typed_config.string_config["number_with_comma"], "1,000");
+    }
 }
