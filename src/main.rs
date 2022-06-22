@@ -118,9 +118,14 @@ impl TypedValue {
 
 fn main() -> Result<(), Box<(dyn Error + 'static)>> {
     let args: Vec<String> = env::args().collect();
+    let file_path = if args.len() <= 1 {
+        "test.conf"
+    } else {
+        &args[1]
+    };
+    
     let mut config = Ini::new();
-
-    let raw_config = config.load(&args[1])?;
+    let raw_config = config.load(file_path)?;
     let typed_config = TypedConfig::raw_to_typed(raw_config);
     println!("{:#?}", typed_config);
 
