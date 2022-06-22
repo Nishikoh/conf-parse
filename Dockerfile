@@ -6,6 +6,7 @@ COPY Cargo.toml Cargo.toml
 RUN mkdir src
 
 # docker cacheを効かせるため
+# TODO:sccache, mold なんかを使うとbuild速度改善できるかも
 RUN echo "fn main(){}" > src/main.rs
 RUN cargo build --release
 
