@@ -116,7 +116,7 @@ impl TypedValue {
     }
 }
 
-fn main() -> Result<(), Box<(dyn std::error::Error + 'static)>> {
+fn main() -> Result<(), Box<(dyn Error + 'static)>> {
     let args: Vec<String> = env::args().collect();
     let mut config = Ini::new();
 
