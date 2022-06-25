@@ -19,7 +19,6 @@ CMD cargo run test.conf
 
 FROM base as build-production
 RUN cargo build --release
-CMD ./target/release/parse-conf test.conf
 
 FROM gcr.io/distroless/cc as production
 COPY --from=build-production /app/target/release/parse-conf /

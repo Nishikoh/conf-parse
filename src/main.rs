@@ -3,7 +3,6 @@ use std::collections::HashMap;
 use std::env;
 use std::error::Error;
 
-// 各タイプのハッシュマップのstruct 定義
 #[derive(Debug)]
 struct TypedConfig {
     integer_config: HashMap<String, i128>,
@@ -14,7 +13,6 @@ struct TypedConfig {
 }
 
 impl TypedConfig {
-    // 各タイプのハッシュマップを初期化する
     fn new() -> Self {
         TypedConfig {
             integer_config: HashMap::new(),
@@ -96,7 +94,6 @@ impl TypedConfig {
     }
 }
 
-// 各タイプの構造体を定義
 #[derive(Debug)]
 struct TypedValue {
     integer_value: Option<i128>,
